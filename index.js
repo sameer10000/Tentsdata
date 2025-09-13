@@ -17,7 +17,11 @@ const PINATA_JWT = process.env.PINATA_JWT;
 const validOrderKeys = new Set();
 
 app.use(express.json());
-
+app.use(cors({
+  origin: ['https://canvashome.com', 'http://127.0.0.1:5500'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-vercel-protection-bypass']
+}));
 // Endpoint to generate a new, unique order key for a client.
 app.post('/api/generate-order-key', async (req, res) => {
     try {
