@@ -7,6 +7,7 @@ const crypto = require('crypto');
 
 const app = express();
 const port = 3000;
+app.use(cors());
 
 // You MUST store your JWT in environment variables for security.
 // DO NOT hard-code them.
