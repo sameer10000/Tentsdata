@@ -32,6 +32,29 @@ app.post('/api/generate-order-key', async (req, res) => {
         res.status(500).json({ error: 'Failed to generate order key.' });
     }
 });
+app.post("/api/check-discount-code/:code", (req, res) => {
+  const { code } = req.params;
+  let discount = 0;
+
+  switch (code.toUpperCase()) {
+    case "HELLOTENTSTUSTIC3":
+      discount = 3;
+      break;
+    case "MELBOURNETENTS10":
+      discount = 10;
+      break;
+    case "BIGTENT20":
+      discount = 20;
+      break;
+    case "FESTIVALTENT15":
+      discount = 15;
+      break;
+    default:
+      return res.status(400).json({ valid: false, discount: 0 });
+  }
+
+  return res.json({ valid: true, discount });
+});
 
 // This is the SECURED API endpoint the frontend will call.
 app.post('/api/upload-order', async (req, res) => {
